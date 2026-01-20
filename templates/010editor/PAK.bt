@@ -1,0 +1,29 @@
+
+char magic[4];
+uint a;
+uint offset;
+uint a;
+uint fileNum;
+uint unk;
+
+FSeek(offset);
+
+struct {
+  uint offset;
+  uint unk;
+  uint size;
+  uint unk;
+  uint length;
+  ubyte unk;
+  uint unk; //const
+  char name[length - 1];
+} rec[fileNum] <optimize=false>;
+
+local uint i;
+for (i = 0; i < fileNum; ++i)
+{
+  FSeek(rec[i].offset);
+  struct {
+    byte data[rec[i].size];
+  } file;
+}

@@ -1,0 +1,22 @@
+IDString "\x50\x41\x43\x4B" 
+
+get unk long
+get offset long
+get unk long
+get FILES long
+get unk long
+
+GoTo offset
+
+for i = 0 < FILES
+    get OFFSET long
+    get unk long 
+    get FSIZE long
+    get unk long 
+    get LENGTH long
+    get unk byte 
+    get unk long 
+    xmath LENGTH "LENGTH - 1"
+    getdstring FNAME LENGTH
+    log FNAME OFFSET FSIZE
+next i

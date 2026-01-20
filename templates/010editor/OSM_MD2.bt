@@ -1,0 +1,105 @@
+//------------------------------------------------
+//--- 010 Editor v12.0.1 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+local string ext = FileNameGetExtension(GetFileName());
+
+char magic[4];
+uint version;
+uint skinWidth;
+uint skinHeight;
+uint frameSize;
+
+uint numSkins;
+uint vertPerFrame;
+uint numTexCoords;
+uint numFaces;
+
+uint unk;
+uint frameNum;
+
+uint offset;
+uint offsetVertices;
+uint offsetFaces;
+uint offsetFrames;
+uint offsetUnk;
+uint offsetUnk;
+
+char name[64];
+
+if (ext == ".osm") 
+{
+  struct {
+    float u;
+    float v;
+  } uv[numTexCoords];
+
+  struct {
+    uint vi1;
+    uint vi2;
+    uint vi3;
+
+    uint uvi1;
+    uint uvi2;
+    uint uvi3;
+  } face[numFaces];
+
+  struct {
+    char name1[16];
+     struct {
+        float x;
+        float y;
+        float z;
+        uint normalIndex;
+     } vert[vertPerFrame];
+  } frameVertices[frameNum];
+
+  if (frameNum == 1)
+  struct {
+    struct {
+      float x;
+      float y;
+      float z;
+      float w;
+    } vert[vertPerFrame];
+  } frameData[frameNum];
+} 
+else if (ext == ".md2") 
+{
+  struct {
+    uint16 u; // u / skinWidth
+    uint16 v; // v / skinHeight
+  } uv[numTexCoords]; 
+
+  struct {
+    uint16 vi1;
+    uint16 vi2;
+    uint16 vi3;
+    uint16 uui1;
+    uint16 uvi2;
+    uint16 uvi3;
+  } face[numFaces];
+
+  struct {
+    float scale1;
+    float scale2;
+    float scale3;
+    float transl1;
+    float transl2;
+    float transl3;
+    char name1[16];
+     struct {
+        char v[3]; // v * scale + transl
+        byte normalIndex;
+     } vert[vertPerFrame];
+  } framePos[frameNum];
+}
